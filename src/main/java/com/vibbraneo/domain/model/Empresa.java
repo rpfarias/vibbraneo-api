@@ -21,11 +21,11 @@ public class Empresa {
     private String legal_name;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "empresa", fetch = FetchType.LAZY)
-    private Receita receita;
+    @OneToOne
+    private Revenue revenue;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "empresa", fetch = FetchType.LAZY)
+    @OneToOne
     private Despesa despesa;
 
 }

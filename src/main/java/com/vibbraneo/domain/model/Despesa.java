@@ -24,11 +24,11 @@ public class Despesa {
     private Integer customer_id;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "despesa", fetch = FetchType.LAZY)
-    private Categoria categoria;
+    @OneToOne
+    private Category category;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "despesa", fetch = FetchType.LAZY)
+    @OneToOne
     private Empresa empresa;
 
     @ToString.Exclude

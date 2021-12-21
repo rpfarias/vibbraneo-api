@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "tbl_receita")
-public class Receita {
+public class Revenue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,11 @@ public class Receita {
     private LocalDateTime transaction_date;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "receita", fetch = FetchType.LAZY)
-    private Empresa empresas;
+    @OneToOne
+    private Empresa empresa;
+
+    @ToString.Exclude
+    @ManyToOne
+    private User user;
 
 }
