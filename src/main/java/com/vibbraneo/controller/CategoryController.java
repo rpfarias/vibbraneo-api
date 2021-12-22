@@ -1,7 +1,6 @@
 package com.vibbraneo.controller;
 
 import com.vibbraneo.domain.model.Category;
-import com.vibbraneo.repository.CategoryCustomRepository;
 import com.vibbraneo.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +15,23 @@ public class CategoryController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Autowired
-    CategoryCustomRepository categoryCustomRepository;
-
     @PostMapping
     public Category create(@RequestBody Category category) {
         return categoryRepository.save(category);
     }
 
     @GetMapping
-    public List<Category> getAll() { return categoryRepository.findAll(); }
+    public List<Category> getAll(@RequestParam(value = "name", required = false) String name) {
+        if (name != null) {
+            return categoryRepository.findAllByNameContaining(name);
+        } else {
+            return categoryRepository.findAll();
+        }
+    }
 
     @GetMapping("/{id}")
     public Optional<Category> getById(@PathVariable(value = "id") Long id) {
         return categoryRepository.findById(id);
-    }
-
-    @GetMapping("/{name}")
-    public List<Category> getByName(@PathVariable(value = "name") String name) {
-        return categoryCustomRepository.findByNameLike(name);
     }
 
     @PutMapping("/{id}/archive")// Esse não entendi
